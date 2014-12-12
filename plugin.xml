@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  id="com.fiftyfive.fiftaghandler"
+  version="0.0.2">
+  <engines>
+    <engine name="cordova" version=">=3.0.0" />
+  </engines>
+
+  <name>FIFTagHandler</name>
+  <description>Plugin for FIFTagHandler Native SDKs (Android, iOS)</description>
+  <author>Med Hajlaoui</author>
+  <license>Apache 2.0</license>
+  <keywords>cordova,fifty,five,gtm,ga,tracking</keywords>
+  <repo>https://github.com/medhaj/fiftaghandler-cordova-plugin.git</repo>
+
+  <js-module src="www/fiftaghandler.js" name="FIFTagHandler">
+    <clobbers target="navigator.fiftaghandler" />
+  </js-module>
+
+  <platform name="ios">
+    <config-file target="config.xml" parent="/*">
+      <feature name="FIFTagHandler">
+        <param name="ios-package" value="FIFTagHandlerPlugin" />
+      </feature>
+    </config-file>
+
+    <header-file src="ios/GAI.h" />
+    <header-file src="ios/GAIDictionaryBuilder.h" />
+    <header-file src="ios/GAIEcommerceFields.h" />
+    <header-file src="ios/GAIEcommerceProduct.h" />
+    <header-file src="ios/GAIEcommerceProductAction.h" />
+    <header-file src="ios/GAIEcommercePromotion.h" />
+    <header-file src="ios/GAIFields.h" />
+    <header-file src="ios/GAILogger.h" />
+    <header-file src="ios/GAITrackedViewController.h" />
+    <header-file src="ios/GAITracker.h" />
+
+    <header-file src="ios/TAGContainer.h" />
+    <header-file src="ios/TAGContainerOpener.h" />
+    <header-file src="ios/TAGDataLayer.h" />
+    <header-file src="ios/TAGLogger.h" />
+    <header-file src="ios/TAGManager.h" />
+
+    <source-file src="ios/libGoogleAnalyticsServices.a" framework="true" />
+    <source-file src="ios/libAdIdAccess.a" framework="true" />
+    <header-file src="ios/FIFTagHandlerPlugin.h" />
+    <source-file src="ios/FIFTagHandlerPlugin.m" />
+
+    <framework src="ios/FacebookSDK.framework" custom="true" />
+    <framework src="ios/MobileAppTracker.framework" custom="true" />
+    <framework src="ios/FIFTagHandler.framework" custom="true" />
+
+
+    <framework src="MobileCoreServices.framework" />
+    <framework src="iAd.framework" />
+    <framework src="CoreTelephony.framework" />
+    <framework src="SystemConfiguration.framework" />
+    <framework src="CoreData.framework" />
+    <framework src="AdSupport.framework" />
+    <framework src="libsqlite3.dylib" />
+    <framework src="libz.dylib" />
+  </platform>
+
+  <platform name="android">
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="FIFTagHandler">
+        <param name="android-package" value="com.fiftyfive.fiftaghandler.FIFTagHandlerPlugin" />
+      </feature>
+    </config-file>
+
+    <config-file target="AndroidManifest.xml" parent="/manifest/application">
+      <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+    </config-file>
+
+    <config-file target="AndroidManifest.xml" parent="/*">
+      <uses-permission android:name="android.permission.INTERNET" />
+      <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    </config-file>
+
+    <resource-file src="android/com/fiftyfive/fiftaghandler/fiftaghandler.properties" target="res/raw/fiftaghandler.properties" />
+    <resource-file src="android/com/fiftyfive/fiftaghandler/gtm_default_container" target="res/raw/gtm_default_container" />
+
+    <source-file src="android/com/fiftyfive/fiftaghandler/FIFTagHandlerPlugin.java" target-dir="src/com/fiftyfive/fiftaghandler/" />
+    <source-file src="android/com/fiftyfive/fiftaghandler/google-play-services.jar" target-dir="libs" />
+    <source-file src="android/com/fiftyfive/fiftaghandler/FIFTagHandler.jar" target-dir="libs" />
+    <source-file src="android/com/fiftyfive/fiftaghandler/MobileAppTracker.jar" target-dir="libs" />
+    <source-file src="android/com/fiftyfive/fiftaghandler/version.xml" target-dir="res/values" />
+
+    <proguard-config>
+-keep class * extends java.util.ListResourceBundle {
+protected Object[][] getContents();
+}
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+public static final *** NULL;
+}
+-keepnames @com.google.android.gms.common.annotation.KeepName class *
+-keepclassmembernames class * {
+@com.google.android.gms.common.annotation.KeepName *;
+}
+-keepnames class * implements android.os.Parcelable {
+public static final ** CREATOR;
+}
+    </proguard-config>
+  </platform>
+
+</plugin>

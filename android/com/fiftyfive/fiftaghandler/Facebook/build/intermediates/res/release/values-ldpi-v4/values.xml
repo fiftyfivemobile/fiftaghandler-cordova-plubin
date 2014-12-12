@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- From: file:/Users/staging/android_fiftaghandler/android/tags/1.1.18/Buildspace/5486cec5e4b03f9dd9b74c04/trackers/FB/v3_14_1/src/main/res/values-ldpi/dimens.xml -->
+    <eat-comment />
+
+    <dimen name="com_facebook_picker_divider_width">1px</dimen>
+
+</resources>
