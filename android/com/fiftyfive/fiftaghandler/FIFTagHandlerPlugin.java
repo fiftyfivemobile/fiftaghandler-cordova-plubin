@@ -75,9 +75,14 @@ public class FIFTagHandlerPlugin extends CordovaPlugin {
     public boolean execute(String action, JSONArray args, CallbackContext callback) throws JSONException {
         try {
             if ("setContainerId".equals(action)) {
+                setContainerId(args.getString(0));
                 callback.success();
                 return true;
-            }
+            } else if ("push".equals(action)) {
+                push(objectToMap(args.getJSONObject(0)));
+                callback.success();
+                return true;
+            } 
             else if ("setTrackingId".equals(action)) {
                 setTrackingId(args.getString(0));
                 callback.success();
@@ -121,7 +126,6 @@ public class FIFTagHandlerPlugin extends CordovaPlugin {
     
     private void setContainerId(String containerId) {
         //Launch Tag Manager
-
         Context context = this.cordova.getActivity().getApplicationContext();
         final TagManager tagManager = TagManager.getInstance(context);
 
@@ -150,17 +154,40 @@ public class FIFTagHandlerPlugin extends CordovaPlugin {
                 }
 
                 FIFTagHandler.getInstance().register();
+
+                DataLayer dataLayer = FIFTagHandler.getInstance().getTagManager().getDataLayer();
+                // Push Google Id
+                String googleId = getGoogleUserId();
+                if (googleId != null) {
+                    Map<String, String> mapGoogleId = new HashMap<String, String>();
+                    mapGoogleId.put("userGoogleId", googleId);
+                    dataLayer.push(mapGoogleId);
+                }
+
+                // Push application start event
+                Map<String, String> appStartMap = new HashMap<String, String>();
+                appStartMap.put("event", "applicationStart");
+                dataLayer.push(appStartMap);
             }
         }, 2, TimeUnit.SECONDS);
     }
 
+    private String getGoogleUserId() {
+        if (tracker == null) {
+            tracker = ga.newTracker("UA-11111111-1");
+        }
+
+        return tracker.get("cid");
+    }
+
     private void push(Map<String,Object> map) {
         // Fetch the datalayer
-        DataLayer dataLayer = FIFTagHandler.getInstance().getTagManager().getDataLayer();
-        if (dataLayer == null) {
+        TagManager tagManager = FIFTagHandler.getInstance().getTagManager();
+        if (tagManager == null) {
             throw new IllegalStateException("FIFTagHelper not initialized. Call setContainerId.");
         }
         else {
+            DataLayer dataLayer = tagManager.getDataLayer();
             dataLayer.push(map);
         }
     }
