@@ -47,8 +47,17 @@
     
     
     
-    
-    
+    TAGDataLayer *dataLayer = [[FIFTagHandler sharedHelper] tagManager].dataLayer;
+    // Push the google id
+    NSString *googleId = [self getGoogleId];
+    if (googleId)
+    {
+        [dataLayer push:@{@"userGoogleId": googleId}];
+    }
+
+    // Push applicationStart event
+    [dataLayer push:@{@"event": @"applicationStart"}];
+
     result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:result callbackId:[command callbackId]];
 }
@@ -86,6 +95,24 @@
     result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     
     [self.commandDelegate sendPluginResult:result callbackId:[command callbackId]];
+}
+
+- (NSString *) getGoogleId
+{
+    TAGManager *tagManager = [[FIFTagHandler sharedHelper] tagManager];
+    if (tagManager)
+    {
+        if (!tracker) {
+            // Create empty tracker
+            tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-11111111-1"];
+        }
+
+        // Fetch and push the Google Id
+        NSString * clientID  = [[[GAI sharedInstance] defaultTracker] get:kGAIClientId];
+        return clientID;
+    }
+    
+    return nil;
 }
 
 
