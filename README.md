@@ -37,6 +37,20 @@ Installing this plugin directly from Cordova Registry results in Xcode using a b
 
 ```
 
+#### Edit the package name [Android]
+
+After installing the plugin, make sure to update the FIFTagHandlerPlugin.java file under {PROJECT_DIR} ▸ platforms ▸ android ▸ src ▸ com ▸ fiftyfive ▸ fiftaghandler. Update the following line by adding your app package name to reference the R.java class.
+
+```java
+
+	PendingResult<ContainerHolder> pending =
+                tagManager.loadContainerPreferNonDefault(containerId,
+                        com.fiftyfive.sample.R.raw.gtm_default_container);
+```
+
+Replace com.fiftyfive.sample with your app package name.
+
+
 ## Getting started
 
 #### Initialize the FIFTagHandler SDK
