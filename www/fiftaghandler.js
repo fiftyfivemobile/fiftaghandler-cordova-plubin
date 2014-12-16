@@ -112,9 +112,9 @@ FIFTagHandler.prototype = {
     exec(success, error, 'FIFTagHandler', 'setContainerId', [containerId]);
   },
 
-  push: function (key, value, success, error) {
-    argscheck.checkArgs('s*FF', 'fiftaghandler.push', arguments);
-    exec(success, error, 'FIFTagHandler', 'push', [key, value]);
+  push: function (map, success, error) {
+    argscheck.checkArgs('oFF', 'fiftaghandler.push', arguments);
+    exec(success, error, 'FIFTagHandler', 'push', [map]);
   },
 
   setTrackingId: function (trackingId, success, error) {

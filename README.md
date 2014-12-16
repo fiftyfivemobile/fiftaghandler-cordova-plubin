@@ -73,7 +73,7 @@ Once the FIFTagHandler SDK is initialized, you can push events / data to the Goo
 ```js
 
 	// Push appStarted event to the DataLayer
-	fiftaghandler.push('event', 'appStarted');
+	fiftaghandler.push({'event': 'appStarted'});
 
 ```
 
