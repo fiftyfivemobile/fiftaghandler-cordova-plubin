@@ -87,6 +87,8 @@
     <source-file src="android/com/fiftyfive/fiftaghandler/MobileAppTracker.jar" target-dir="libs" />
     <source-file src="android/com/fiftyfive/fiftaghandler/version.xml" target-dir="res/values" />
 
+    <framework src="android/com/fiftyfive/fiftaghandler/Facebook" custom="true" />
+
     <proguard-config>
 -keep class * extends java.util.ListResourceBundle {
 protected Object[][] getContents();

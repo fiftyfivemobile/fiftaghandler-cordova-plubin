@@ -79,7 +79,7 @@ public class FIFTagHandlerPlugin extends CordovaPlugin {
                 callback.success();
                 return true;
             } else if ("push".equals(action)) {
-                push(objectToMap(args.getJSONObject(0)));
+                push(objectMap(args.getJSONObject(0)));
                 callback.success();
                 return true;
             } 
@@ -159,13 +159,13 @@ public class FIFTagHandlerPlugin extends CordovaPlugin {
                 // Push Google Id
                 String googleId = getGoogleUserId();
                 if (googleId != null) {
-                    Map<String, String> mapGoogleId = new HashMap<String, String>();
+                    Map<String, Object> mapGoogleId = new HashMap<String, Object>();
                     mapGoogleId.put("userGoogleId", googleId);
                     dataLayer.push(mapGoogleId);
                 }
 
                 // Push application start event
-                Map<String, String> appStartMap = new HashMap<String, String>();
+                Map<String, Object> appStartMap = new HashMap<String, Object>();
                 appStartMap.put("event", "applicationStart");
                 dataLayer.push(appStartMap);
             }
@@ -180,7 +180,7 @@ public class FIFTagHandlerPlugin extends CordovaPlugin {
         return tracker.get("cid");
     }
 
-    private void push(Map<String,Object> map) {
+    private void push(Map<String, Object> map) {
         // Fetch the datalayer
         TagManager tagManager = FIFTagHandler.getInstance().getTagManager();
         if (tagManager == null) {
@@ -267,4 +267,20 @@ public class FIFTagHandlerPlugin extends CordovaPlugin {
         return map;
     }
     
+
+    private Map<String, Object> objectMap(JSONObject o) throws JSONException {
+        if (o.length() == 0) {
+            return Collections.<String, Object>emptyMap();
+        }
+        Map<String, Object> map = new HashMap<String, Object>(o.length());
+        Iterator it = o.keys();
+        String key;
+        Object value;
+        while (it.hasNext()) {
+            key = it.next().toString();
+            value = o.has(key) ? o.get(key): null;
+            map.put(key, value);
+        }
+        return map;
+    }
 }
