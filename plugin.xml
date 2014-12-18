@@ -25,25 +25,6 @@
       </feature>
     </config-file>
 
-    <config-file target="*-Info.plist" parent="FacebookAppID">
-            <string>$FB_APP_ID</string>
-        </config-file>
-
-        <config-file target="*-Info.plist" parent="FacebookDisplayName">
-            <string>$FB_APP_NAME</string>
-        </config-file>
-
-        <config-file target="*-Info.plist" parent="CFBundleURLTypes">
-          <array>
-            <dict>
-              <key>CFBundleURLSchemes</key>
-              <array>
-                <string>fb$FB_APP_ID</string>
-              </array>
-            </dict>
-          </array>
-        </config-file>
-
     <header-file src="ios/GAI.h" />
     <header-file src="ios/GAIDictionaryBuilder.h" />
     <header-file src="ios/GAIEcommerceFields.h" />
@@ -91,15 +72,6 @@
     <config-file target="AndroidManifest.xml" parent="/manifest/application">
       <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
     </config-file>
-
-    <config-file target="facebook.xml" parent="/*">
-            <string name="fb_app_id">$FB_APP_ID</string>
-            <string name="fb_app_name">$FB_APP_NAME</string>
-        </config-file>
-
-        <config-file target="AndroidManifest.xml" parent="application">
-            <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/fb_app_id"/>
-        </config-file>
 
     <config-file target="AndroidManifest.xml" parent="/*">
       <uses-permission android:name="android.permission.INTERNET" />
