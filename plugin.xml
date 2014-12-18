@@ -78,8 +78,8 @@
       <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     </config-file>
 
-    <resource-file src="android/fiftaghandler.properties" target="res/raw/fiftaghandler.properties" />
-    <resource-file src="android/gtm_default_container" target="res/raw/gtm_default_container" />
+    <source-file src="android/fiftaghandler.properties" target-dir="res/raw/" />
+    <source-file src="android/gtm_default_container" target-dir="res/raw/" />
 
     <source-file src="android/FIFTagHandlerPlugin.java" target-dir="src/com/fiftyfive/fiftaghandler/" />
     <source-file src="android/google-play-services.jar" target-dir="libs" />
