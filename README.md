@@ -19,17 +19,6 @@ This plugin provides support for some of the most specific analytics functions (
 #### Using the Cordova CLI [Android Only]
 To install the FIFTagHandler plugin in your app, use the following command-line
 
-```shell
-
-	cordova plugin add com.fifty-five.fiftaghandler
-
-```
-
-
-#### Cordova Registry Warning [iOS]
-
-
-Installing this plugin directly from Cordova Registry results in Xcode using a broken FIFTagHandler.framework, this is because the current publish procedure to NPM breaks symlinks [CB-6092](https://issues.apache.org/jira/browse/CB-6092). Please install the plugin through a locally cloned copy or from the [plugin git repository](https://github.com/fiftyfivemobile/fiftaghandler-cordova-plugin) using the following command
 
 ```shell
 
@@ -49,6 +38,10 @@ After installing the plugin, make sure to update the FIFTagHandlerPlugin.java fi
 ```
 
 Replace com.fiftyfive.sample with your app package name.
+
+#### Configure the Facebook SDK
+
+Once the FIFTagHandler plugin for cordova is installed, make sure to edit both iOS and Android projects to add the Facebook app id and the facebook app name. For more details, please follow instructions of the [Facebook documentation](https://developers.facebook.com/docs/)
 
 
 ## Getting started
