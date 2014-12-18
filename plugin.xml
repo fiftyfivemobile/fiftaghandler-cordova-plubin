@@ -12,7 +12,7 @@
   <author>Med Hajlaoui</author>
   <license>Apache 2.0</license>
   <keywords>cordova,fifty,five,gtm,ga,tracking</keywords>
-  <repo>https://github.com/fiftyfivemobile/fiftaghandler-cordova-plugin.git</repo>
+  <repo>https://github.com/fiftyfivemobile/fiftaghandler-cordova-plugin</repo>
 
   <js-module src="www/fiftaghandler.js" name="FIFTagHandler">
     <clobbers target="navigator.fiftaghandler" />
@@ -78,8 +78,8 @@
       <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     </config-file>
 
-    <source-file src="android/fiftaghandler.properties" target-dir="res/raw/" />
-    <source-file src="android/gtm_default_container" target-dir="res/raw/" />
+    <source-file src="android/fiftaghandler.properties" target-dir="res/raw" />
+    <source-file src="android/gtm_default_container" target-dir="res/raw" />
 
     <source-file src="android/FIFTagHandlerPlugin.java" target-dir="src/com/fiftyfive/fiftaghandler/" />
     <source-file src="android/google-play-services.jar" target-dir="libs" />
