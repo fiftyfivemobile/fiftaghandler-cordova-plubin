@@ -12,7 +12,7 @@
   <author>Med Hajlaoui</author>
   <license>Apache 2.0</license>
   <keywords>cordova,fifty,five,gtm,ga,tracking</keywords>
-  <repo>https://github.com/medhaj/fiftaghandler-cordova-plugin.git</repo>
+  <repo>https://github.com/fiftyfivemobile/fiftaghandler-cordova-plugin.git</repo>
 
   <js-module src="www/fiftaghandler.js" name="FIFTagHandler">
     <clobbers target="navigator.fiftaghandler" />
@@ -24,6 +24,25 @@
         <param name="ios-package" value="FIFTagHandlerPlugin" />
       </feature>
     </config-file>
+
+    <config-file target="*-Info.plist" parent="FacebookAppID">
+            <string>$FB_APP_ID</string>
+        </config-file>
+
+        <config-file target="*-Info.plist" parent="FacebookDisplayName">
+            <string>$FB_APP_NAME</string>
+        </config-file>
+
+        <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+          <array>
+            <dict>
+              <key>CFBundleURLSchemes</key>
+              <array>
+                <string>fb$FB_APP_ID</string>
+              </array>
+            </dict>
+          </array>
+        </config-file>
 
     <header-file src="ios/GAI.h" />
     <header-file src="ios/GAIDictionaryBuilder.h" />
@@ -73,13 +92,22 @@
       <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
     </config-file>
 
+    <config-file target="facebook.xml" parent="/*">
+            <string name="fb_app_id">$FB_APP_ID</string>
+            <string name="fb_app_name">$FB_APP_NAME</string>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="application">
+            <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/fb_app_id"/>
+        </config-file>
+
     <config-file target="AndroidManifest.xml" parent="/*">
       <uses-permission android:name="android.permission.INTERNET" />
       <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     </config-file>
 
-    <source-file src="android/fiftaghandler.properties" target-dir="res/raw/" />
-    <source-file src="android/gtm_default_container" target-dir="res/raw/" />
+    <resource-file src="android/fiftaghandler.properties" target-dir="res/raw/" />
+    <resource-file src="android/gtm_default_container" target-dir="res/raw/" />
 
     <source-file src="android/FIFTagHandlerPlugin.java" target-dir="src/com/fiftyfive/fiftaghandler/" />
     <source-file src="android/google-play-services.jar" target-dir="libs" />
