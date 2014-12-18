@@ -16,7 +16,6 @@ This plugin provides support for some of the most specific analytics functions (
 
 ## Installation
 
-#### Using the Cordova CLI [Android Only]
 To install the FIFTagHandler plugin in your app, use the following command-line
 
 
